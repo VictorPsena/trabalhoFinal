@@ -31,34 +31,6 @@ def VerificaInt(num):
             return n
 #####################################Taxa de lucro ###########################################
 
-def TaxaDeLucro(PrecoComprado, PrecoAnunciado, quantidade):
-    preco1 = VerificaFloat(PrecoComprado)
-    preco2 = VerificaFloat(PrecoAnunciado)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -248,31 +220,64 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
  
 
 # LucroMinimoTotal(3, 0.2, 1000, 0.5 )
+###############################################################################################
 
-################## Atribui a taxa relacionada ao valor da compra #############################
-def VerificaValorCompra(valor):
+
+#####################################Taxa de lucro ###########################################
+# Para calcular o desconto máximo é nescessario estipular um lucro mínimo liquido(%), estipulado o lucro mínimo, a porcentagem de desconto não pode ser menor que o lucro minimo liquido.
+
+def DescontoMax(ValorCompra, ValorVenda, TaxaCartao):
+    Lucro_Liq = 0
+    Lucro_marg = 0
     taxa = 0
     while True:
-        if 0 < valor < 500:
-            taxa = 0.05
-            return taxa
-        elif 500 <= valor < 5000:
-            taxa = 0.1
-            return taxa
-        elif 5000 <= valor:
-            taxa = 0.04
-            return taxa
-        else:
-            print('valor da compra \033[34minválido\033[m')
-            while True:
-                try:
-                    valor = float(input("Digite o valor da compra: "))
-                except (ValueError, TypeError):
-                    print('Valor da Compra \033[34minválido\033[m')
-                    continue
-                else:
-                    break
-            continue
+     Val_Comp = VerificaFloat(ValorCompra)
+     Val_Vend = VerificaFloat(ValorVenda)
+     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+     Lucro_marg = Lucro_Liq/Val_Vend
+     if 0 < Val_Vend < 500:
+        if Lucro_marg < 0.1:
+            print()
+     elif 500 <= Val_Vend < 5000:
+        taxa = 0.05
+     else:
+        print("Valor da Compra não cadastrado")
+        continue
+
+
+
+
+
+###############################################################################################
+
+
+
+
+#################### Atribui a taxa relacionada ao valor da compra ##############################
+
+# def VerificaValorCompra(valor):
+#     taxa = 0
+#     while True:
+#         if 0 < valor < 500:
+#             taxa = 0.05
+#             return taxa
+#         elif 500 <= valor < 5000:
+#             taxa = 0.1
+#             return taxa
+#         elif 5000 <= valor <= 20000:
+#             taxa = 0.04
+#             return taxa
+#         else:
+#             print('valor da compra \033[34minválido\033[m')
+#             while True:
+#                 try:
+#                     valor = float(input("Digite o valor da compra: "))
+#                 except (ValueError, TypeError):
+#                     print('Valor da Compra \033[34minválido\033[m')
+#                     continue
+#                 else:
+#                     break
+#             continue
 ##############################################################################################
 
 
