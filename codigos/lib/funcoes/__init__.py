@@ -223,27 +223,129 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 ###############################################################################################
 
 
+
+################## Calcula o preço que o vendedor pode colocar no produto #######################
+# Para definirmos nosso valor ideal do preço do produto temos que saber como a nossa loja funciona e com qual frequência o produto está sendo vendido, se estiver sendo muito vendido, podemos aumenter a nossa margem de lucro, se não, diminuir, se for muito dificil de produzir, podemos aumenter, e assim por diante. Temos vários fatores que acarretam na variação do lucro, mas, digamos que podemos definir uma margem de lucro depedendo do preço do produto, por exemplo, se o produto custa entre 0 < custo < 500 a margem de lucro é de 10% em cima do valor do produto, caso o valor aumente, eu posso diminuir a porcentagem, entretanto o lucro será maior.
+
+
+
+def PrecoIdeal(ValorCompra,  bandeira):
+    ValorVenda = 0
+    listaTaxas =[]
+    while True:
+        if bandeira == 'visa' or bandeira == 'mastercard':
+             if  0 < ValorCompra < 500:
+                 listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
+                 taxa = 0.12 # em cada if a única coisa que muda é a taxa 
+                 soma = 0
+                 for i in listaTaxas:
+                     soma += i*ValorCompra
+
+                 media = soma/len(listaTaxas)
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+
+                 return ValorVenda
+       
+             elif  500 <= ValorCompra < 5000:
+                 listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
+                 taxa = 0.11 # aqui muda
+                 soma = 0
+                 for i in listaTaxas:
+                     soma += i*ValorCompra
+
+                 media = soma/len(listaTaxas)
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+ 
+                 return ValorVenda
+        
+             elif  5000 <= ValorCompra <= 50000:
+                 listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
+                 taxa = 0.07 # aqui muda
+                 soma = 0
+                 for i in listaTaxas:
+                     soma += i*ValorCompra
+
+                 media = soma/len(listaTaxas)
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+
+                 return ValorVenda
+
+
+        # Agora vamos fazer para as bandeira 'elo' e 'hipercard'
+
+        elif bandeira == 'elo' or bandeira == 'hipercard':
+            if 0 < ValorCompra < 500:
+                    listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
+                    taxa = 0.1
+                    soma = 0
+                    for i in listaTaxas:
+                        soma += i*ValorCompra
+
+                    media = soma/len(listaTaxas)
+                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+
+                    return ValorVenda
+
+
+            elif  500 <= ValorCompra < 5000:
+                    listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
+                    taxa = 0.08
+                    soma = 0
+                    for i in listaTaxas:
+                        soma += i*ValorCompra
+
+                    media = soma/len(listaTaxas)
+                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+
+                    return ValorVenda
+
+            elif 5000 <= ValorCompra <= 50000:
+                    listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
+                    taxa = 0.05
+                    soma = 0
+                    for i in listaTaxas:
+                        soma += i*ValorCompra
+
+                    media = soma/len(listaTaxas)
+                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+            
+                    return ValorVenda
+
+        else:
+           print("\033[33mAlgum valor está errado\033[m")
+           ValorCompra = int(input("Digite o valor da compra: "))
+           bandeira = str(input("Informe a bandeira: ")).lower()
+           continue
+###############################################################################################
+
+
 #####################################Taxa de lucro ###########################################
-# Para calcular o desconto máximo é nescessario estipular um lucro mínimo liquido(%), estipulado o lucro mínimo, a porcentagem de desconto não pode ser menor que o lucro minimo liquido.
+# Para calcular o desconto máximo é nescessario estipular um lucro mínimo(%), estipulado o lucro mínimo, a porcentagem de desconto não pode ser menor que o lucro minimo.
 
 def DescontoMax(ValorCompra, ValorVenda, TaxaCartao):
     Lucro_Liq = 0
     Lucro_marg = 0
-    taxa = 0
     while True:
-     Val_Comp = VerificaFloat(ValorCompra)
-     Val_Vend = VerificaFloat(ValorVenda)
-     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
-     Lucro_marg = Lucro_Liq/Val_Vend
-     if 0 < Val_Vend < 500:
+        Val_Comp = ValorCompra
+        Val_Vend = ValorVenda
+        Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+        print(f'R${Lucro_Liq:.2f}')
+        Lucro_marg = Lucro_Liq/Val_Vend
+        print(Lucro_marg)
         if Lucro_marg < 0.1:
-            print()
-     elif 500 <= Val_Vend < 5000:
-        taxa = 0.05
-     else:
-        print("Valor da Compra não cadastrado")
-        continue
+            return 'Compra cancelado, tente renegociar.'
+        else:
+            return Lucro_marg
 
+opcao = DebCred('Débito ou Crédito: ')
+print(opcao)
+taxa = TaxaBandeira('elo', 12, opcao )
+print(taxa)
+preco = PrecoIdeal(50000, 'elo')
+print(preco)
+
+x = DescontoMax(50000, preco, taxa )  
+print(x)
 
 
 
