@@ -325,26 +325,28 @@ def PrecoIdeal(ValorCompra,  bandeira):
 def DescontoMax(ValorCompra, ValorVenda, TaxaCartao):
     Lucro_Liq = 0
     Lucro_marg = 0
+    desconMax = 0
     while True:
         Val_Comp = ValorCompra
         Val_Vend = ValorVenda
         Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
         print(f'R${Lucro_Liq:.2f}')
         Lucro_marg = Lucro_Liq/Val_Vend
-        print(Lucro_marg)
+        desconMax = Lucro_Liq - Val_Vend*0.1
+        print(f'R${desconMax:.2f}')
         if Lucro_marg < 0.1:
             return 'Compra cancelado, tente renegociar.'
         else:
-            return Lucro_marg
+            return [Lucro_marg, desconMax]
 
 opcao = DebCred('Débito ou Crédito: ')
 print(opcao)
-taxa = TaxaBandeira('elo', 12, opcao )
+taxa = TaxaBandeira('visa', 6, opcao )
 print(taxa)
-preco = PrecoIdeal(50000, 'elo')
+preco = PrecoIdeal(1000, 'visa')
 print(preco)
 
-x = DescontoMax(50000, preco, taxa )  
+x = DescontoMax(1000, preco, taxa )  
 print(x)
 
 
