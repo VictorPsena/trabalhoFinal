@@ -1,3 +1,4 @@
+# Aqui, vou colocar todas as funções que utilizarei no para gerar o aplicativo
 from time import sleep
 
 def Linhas2(tam = 42):
@@ -29,9 +30,8 @@ def VerificaInt(num):
             continue
         else:
             return n
-#####################################Taxa de lucro ###########################################
 
-
+##############################################################################################
 
 
 ######################### Qual é a bandeira do cartão ########################################
@@ -46,43 +46,8 @@ def VerficaBandeira(msg):
         else:
             continue
     return n
-###############################################################################################
-
-######################## Mostra as taxas da bandeira escolida1.0 #############################
-
-# def BandeiraEscolida(msg):
-#     taxa = 0
-#     parcelando = 0
-
-#     if msg == 'visa':
-#         taxa = 2.5
-#         parcelando = 1.99
-#         print(f'Na bandeira {msg.upper()} a taxa a vista é {taxa}% e parcelado é {parcelando}%')
-#         Linhas2()
-#         lista = [taxa, parcelando]
-#         return lista
-#     elif msg == 'mastercard':
-#         taxa = 2.5
-#         parcelando = 1.58
-#         print(f'Na bandeira {msg.upper()} a taxa a vista é {taxa}% e parcelado é {parcelando}%')
-#         Linhas2()
-#     elif msg == 'elo':
-#         taxa = 2.8
-#         parcelando = 1.4
-#         print(f'Na bandeira {msg.upper()} a taxa a vista é {taxa}% e parcelado é {parcelando}%')
-#         Linhas2()
-#         lista = [taxa, parcelando]
-#     elif msg == 'hipercard':
-#         taxa = 2.1
-#         parcelando = 1.2
-#         print(f'Na bandeira {msg.upper()} a taxa a vista é {taxa}% e parcelado é {parcelando}%')
-#         Linhas2()
-#         lista = [taxa, parcelando]
-
 ##############################################################################################
 
-        
-        
 
 ############################### Débito ou crédito ###########################################
 # 7 siginifica que a compra será efetuada no crédito 
@@ -106,7 +71,6 @@ def DebCred(msg):
 ##############################################################################################
 
 
-
 #########################    Quantidade de parcelas ##########################################
 def QuantidadeParcelas(msg):
     while True: 
@@ -121,7 +85,6 @@ def QuantidadeParcelas(msg):
 # print(x)
 
 ##############################################################################################
-
 
 
 ############ Mostra as taxas da bandeira escolida 2.0 tendo o número de parcelas #############
@@ -175,63 +138,18 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 ##############################################################################################
 
 
-
-
-
-
-
-#################################### Se for parcelado ########################################
-
-# def Parcelado(msg):
-#     juros = 0
-#     if msg == 's':
-#         juros = 5.19
-#         print(f"O valor do juros em cada parcela é de \033[33m{juros}%\033[m")
-#     elif msg == 'n':
-#         juros = 1.99
-#         print(f"O valor do juros em cada parcela é de \033[33m{juros}%\033[m")
-#     else:
-#         print('Opção inválida')
-#     return juros
-###############################################################################################
-
-########################### Se for parcelado 2.0 ############################################
-
-
-
-# def Parcelado2(msg):
-#     n = msg 
-#     taxa = 0
-#     listaDeTaxas = ['taxa1', 'taxa2', 'taxa3', 'taxa4', 'taxa5', 'taxa6', 'taxa7', 'taxa8','taxa9', 'taxa10', 'taxa11', 'taxa12']
-#     for i in len(listaDeTaxas):
-#         if n-1 == i:
-#             taxa = listaDeTaxas[i]
-#     return taxa
-
-
-
-###############################################################################################
-
-# def LucroMinimoTotal(quantidade, MaiorTaxa, ValorDoPoduto, LucroMinimo):
-#     for i in range(quantidade):
-#         lucro = MaiorTaxa*ValorDoPoduto + (LucroMinimo*ValorDoPoduto)/i
-    
-#     print(lucro)
- 
-
-# LucroMinimoTotal(3, 0.2, 1000, 0.5 )
-###############################################################################################
-
-
-
-################## Calcula o preço que o vendedor pode colocar no produto #######################
+############### Calcula o preço que o vendedor pode colocar no produto #######################
 # Para definirmos nosso valor ideal do preço do produto temos que saber como a nossa loja funciona e com qual frequência o produto está sendo vendido, se estiver sendo muito vendido, podemos aumenter a nossa margem de lucro, se não, diminuir, se for muito dificil de produzir, podemos aumenter, e assim por diante. Temos vários fatores que acarretam na variação do lucro, mas, digamos que podemos definir uma margem de lucro depedendo do preço do produto, por exemplo, se o produto custa entre 0 < custo < 500 a margem de lucro é de 10% em cima do valor do produto, caso o valor aumente, eu posso diminuir a porcentagem, entretanto o lucro será maior.
 
+# essa função calcula o lucro, desconto máximo e preço ideal para o produto ser vendido 
 
 
-def PrecoIdeal(ValorCompra,  bandeira):
+def ldp(ValorCompra,  bandeira, TaxaCartao):
     ValorVenda = 0
     listaTaxas =[]
+    Lucro_Liq = 0
+    Lucro_marg = 0
+    desconMax = 0
     while True:
         if bandeira == 'visa' or bandeira == 'mastercard':
              if  0 < ValorCompra < 500:
@@ -242,10 +160,19 @@ def PrecoIdeal(ValorCompra,  bandeira):
                      soma += i*ValorCompra
 
                  media = soma/len(listaTaxas)
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
 
-                 return ValorVenda
-       
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 Val_Comp = ValorCompra
+                 Val_Vend = ValorVenda
+                 Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+                 Lucro_marg = Lucro_Liq/Val_Vend
+                 desconMax = Lucro_Liq - Val_Vend*taxa # onde muda
+                 if Lucro_marg < 0.1:
+                    return 'Compra cancelado, tente renegociar.'
+                 else:
+                    return [Lucro_Liq, Lucro_marg, desconMax, ValorVenda ]
+
+        
              elif  500 <= ValorCompra < 5000:
                  listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
                  taxa = 0.11 # aqui muda
@@ -254,9 +181,18 @@ def PrecoIdeal(ValorCompra,  bandeira):
                      soma += i*ValorCompra
 
                  media = soma/len(listaTaxas)
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                
  
-                 return ValorVenda
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 Val_Comp = ValorCompra
+                 Val_Vend = ValorVenda
+                 Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+                 Lucro_marg = Lucro_Liq/Val_Vend
+                 desconMax = Lucro_Liq - Val_Vend*taxa
+                 if Lucro_marg < 0.1:
+                    return 'Compra cancelado, tente renegociar.'
+                 else:
+                    return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
         
              elif  5000 <= ValorCompra <= 50000:
                  listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
@@ -266,9 +202,17 @@ def PrecoIdeal(ValorCompra,  bandeira):
                      soma += i*ValorCompra
 
                  media = soma/len(listaTaxas)
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
 
-                 return ValorVenda
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 Val_Comp = ValorCompra
+                 Val_Vend = ValorVenda
+                 Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+                 Lucro_marg = Lucro_Liq/Val_Vend
+                 desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                 if Lucro_marg < 0.1:
+                    return 'Compra cancelado, tente renegociar.'
+                 else:
+                    return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
 
 
         # Agora vamos fazer para as bandeira 'elo' e 'hipercard'
@@ -282,9 +226,17 @@ def PrecoIdeal(ValorCompra,  bandeira):
                         soma += i*ValorCompra
 
                     media = soma/len(listaTaxas)
-                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
 
-                    return ValorVenda
+                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                    Val_Comp = ValorCompra
+                    Val_Vend = ValorVenda
+                    Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+                    Lucro_marg = Lucro_Liq/Val_Vend
+                    desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                    if Lucro_marg < 0.1:
+                        return 'Compra cancelado, tente renegociar.'
+                    else:
+                        return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
 
 
             elif  500 <= ValorCompra < 5000:
@@ -295,9 +247,18 @@ def PrecoIdeal(ValorCompra,  bandeira):
                         soma += i*ValorCompra
 
                     media = soma/len(listaTaxas)
+                    
+                    
                     ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
-
-                    return ValorVenda
+                    Val_Comp = ValorCompra
+                    Val_Vend = ValorVenda
+                    Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+                    Lucro_marg = Lucro_Liq/Val_Vend
+                    desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                    if Lucro_marg < 0.1:
+                        return 'Compra cancelado, tente renegociar.'
+                    else:
+                        return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
 
             elif 5000 <= ValorCompra <= 50000:
                     listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
@@ -307,81 +268,29 @@ def PrecoIdeal(ValorCompra,  bandeira):
                         soma += i*ValorCompra
 
                     media = soma/len(listaTaxas)
+                    
+                    
                     ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
-            
-                    return ValorVenda
+                    Val_Comp = ValorCompra
+                    Val_Vend = ValorVenda
+                    Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
+                    Lucro_marg = Lucro_Liq/Val_Vend
+                    desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                    if Lucro_marg < 0.1:
+                        return 'Compra cancelado, tente renegociar.'
+                    else:
+                        return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
 
         else:
            print("\033[33mAlgum valor está errado\033[m")
            ValorCompra = int(input("Digite o valor da compra: "))
            bandeira = str(input("Informe a bandeira: ")).lower()
            continue
-###############################################################################################
 
-
-#####################################Taxa de lucro ###########################################
-# Para calcular o desconto máximo é nescessario estipular um lucro mínimo(%), estipulado o lucro mínimo, a porcentagem de desconto não pode ser menor que o lucro minimo.
-
-def DescontoMax(ValorCompra, ValorVenda, TaxaCartao):
-    Lucro_Liq = 0
-    Lucro_marg = 0
-    desconMax = 0
-    while True:
-        Val_Comp = ValorCompra
-        Val_Vend = ValorVenda
-        Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
-        print(f'R${Lucro_Liq:.2f}')
-        Lucro_marg = Lucro_Liq/Val_Vend
-        desconMax = Lucro_Liq - Val_Vend*0.1
-        print(f'R${desconMax:.2f}')
-        if Lucro_marg < 0.1:
-            return 'Compra cancelado, tente renegociar.'
-        else:
-            return [Lucro_marg, desconMax]
 
 opcao = DebCred('Débito ou Crédito: ')
-print(opcao)
 taxa = TaxaBandeira('visa', 6, opcao )
 print(taxa)
-preco = PrecoIdeal(1000, 'visa')
-print(preco)
-
-x = DescontoMax(1000, preco, taxa )  
-print(x)
-
-
-
-
+lista =ldp(1000, 'visa', taxa )
+print(lista)
 ###############################################################################################
-
-
-
-
-#################### Atribui a taxa relacionada ao valor da compra ##############################
-
-# def VerificaValorCompra(valor):
-#     taxa = 0
-#     while True:
-#         if 0 < valor < 500:
-#             taxa = 0.05
-#             return taxa
-#         elif 500 <= valor < 5000:
-#             taxa = 0.1
-#             return taxa
-#         elif 5000 <= valor <= 20000:
-#             taxa = 0.04
-#             return taxa
-#         else:
-#             print('valor da compra \033[34minválido\033[m')
-#             while True:
-#                 try:
-#                     valor = float(input("Digite o valor da compra: "))
-#                 except (ValueError, TypeError):
-#                     print('Valor da Compra \033[34minválido\033[m')
-#                     continue
-#                 else:
-#                     break
-#             continue
-##############################################################################################
-
-

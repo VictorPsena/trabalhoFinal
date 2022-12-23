@@ -1,5 +1,5 @@
 #Aqui será escrito o código para o trabalho final de Modelagem Matemática.
-from lib.funcoes import*
+from lib.FuncTeste import*
 
 Linhas("Calculadora de taxa do cartão")
 x = VerficaBandeira('Escolha a bandeira: ')
