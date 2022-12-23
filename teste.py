@@ -128,8 +128,8 @@ def DescontoMax(ValorCompra,  bandeira):
            bandeira = str(input("Informe a bandeira: ")).lower()
            continue
 
-x = DescontoMax(4999, 'elo') # Perceni que 499 rende mais do que 500
-print(f'R${x:.2f}')
+# x = DescontoMax(4999, 'elo') # Perceni que 499 rende mais do que 500
+# print(f'R${x:.2f}')
 
 
 # def Valor(num, num2):

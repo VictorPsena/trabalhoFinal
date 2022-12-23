@@ -3,7 +3,7 @@ from lib.FuncCompiladas import *
 from lib.FuncTeste import PrecoIdeal
 from time import sleep
 
-Linhas("\033[33mLDP\033[m")
+Linhas("\033[33mLucro Ideal\033[m")
 bandeira = VerficaBandeira('\033[33mQual é a Bandeira do Seu Cartão:\033[m ')
 Linhas2()
 debcred = DebCred('\033[33mVai ser no débito ou no crédito:\033[m ')

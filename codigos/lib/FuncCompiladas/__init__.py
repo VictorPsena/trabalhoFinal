@@ -2,7 +2,7 @@
 from time import sleep
 
 def Linhas2(tam = 29):
-    print(tam*'\033[32m=\033[m')
+    print(tam*'=+')
 
 def Linhas(msg):
     print('='*42)
