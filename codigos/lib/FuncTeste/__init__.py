@@ -338,15 +338,15 @@ def DescontoMax(ValorCompra, ValorVenda, TaxaCartao):
         else:
             return [Lucro_marg, desconMax]
 
-opcao = DebCred('Débito ou Crédito: ')
-print(opcao)
-taxa = TaxaBandeira('visa', 6, opcao )
-print(taxa)
-preco = PrecoIdeal(1000, 'visa')
-print(preco)
+# opcao = DebCred('Débito ou Crédito: ')
+# print(opcao)
+# taxa = TaxaBandeira('visa', 6, opcao )
+# print(taxa)
+# preco = PrecoIdeal(1000, 'visa')
+# print(preco)
 
-x = DescontoMax(1000, preco, taxa )  
-print(x)
+# x = DescontoMax(1000, preco, taxa )  
+# print(x)
 
 
 

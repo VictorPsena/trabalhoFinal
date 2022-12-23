@@ -1,7 +1,7 @@
 # Aqui, vou colocar todas as funções que utilizarei no para gerar o aplicativo
 from time import sleep
 
-def Linhas2(tam = 42):
+def Linhas2(tam = 29):
     print(tam*'\033[32m=\033[m')
 
 def Linhas(msg):
@@ -139,6 +139,7 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 
 
 ############### Calcula o preço que o vendedor pode colocar no produto #######################
+
 # Para definirmos nosso valor ideal do preço do produto temos que saber como a nossa loja funciona e com qual frequência o produto está sendo vendido, se estiver sendo muito vendido, podemos aumenter a nossa margem de lucro, se não, diminuir, se for muito dificil de produzir, podemos aumenter, e assim por diante. Temos vários fatores que acarretam na variação do lucro, mas, digamos que podemos definir uma margem de lucro depedendo do preço do produto, por exemplo, se o produto custa entre 0 < custo < 500 a margem de lucro é de 10% em cima do valor do produto, caso o valor aumente, eu posso diminuir a porcentagem, entretanto o lucro será maior.
 
 # essa função calcula o lucro, desconto máximo e preço ideal para o produto ser vendido 
@@ -170,7 +171,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg, desconMax, ValorVenda ]
+                    return [Lucro_Liq, Lucro_marg*100, desconMax, ValorVenda ]
 
         
              elif  500 <= ValorCompra < 5000:
@@ -288,9 +289,9 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
            continue
 
 
-opcao = DebCred('Débito ou Crédito: ')
-taxa = TaxaBandeira('visa', 6, opcao )
-print(taxa)
-lista =ldp(1000, 'visa', taxa )
-print(lista)
+# opcao = DebCred('Débito ou Crédito: ')
+# taxa = TaxaBandeira('visa', 6, opcao )
+# print(taxa)
+# lista =ldp(1000, 'visa', taxa )
+# print(lista)
 ###############################################################################################
