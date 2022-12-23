@@ -107,7 +107,7 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
                         return taxa
                     else:
                         continue
-            elif DebitoOuCredito == 6:
+            elif DebitoOuCredito == 6: # Será que tenho que adicionar um 'and parcelas = 1'?
                 taxa = listaDebitoVM
                 return taxa
             else:
@@ -132,7 +132,7 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 
 
 
-# x = TaxaBandeira('elo', 5, 8)
+# x = TaxaBandeira('elo', 12, 6)
 # print(x)
 
 ##############################################################################################

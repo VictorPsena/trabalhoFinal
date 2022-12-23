@@ -21,6 +21,11 @@ sleep(1.5)
 tabela = ['Lucro', 'Margem de Lucro', 'Preço Ideal', 'Desconto Máximo']
 
 for i in range(4):
-    print(f"\033[3{i}m {tabela[i]} : {lista[i]:.2f}\033[m")
-    Linhas2(tam=29)
-    sleep(1)
+    if i == 1:
+        print(f"\033[3{i}m {tabela[i]} : {lista[i]:.2f}%\033[m")
+        Linhas2(tam=29)
+        sleep(1)
+    else:
+        print(f"\033[3{i}m {tabela[i]} : R${lista[i]:.2f}\033[m")
+        Linhas2(tam=29)
+        sleep(1)
