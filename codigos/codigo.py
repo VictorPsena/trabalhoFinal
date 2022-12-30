@@ -9,7 +9,6 @@ Linhas2()
 debcred = DebCred('\033[33mVai ser no débito ou no crédito:\033[m ')
 Linhas2()
 parcelas = QuantidadeParcelas('\033[33mQuantas Parcelas:\033[m ')
-
 taxa = TaxaBandeira(bandeira, parcelas, debcred)
 Linhas('\033[33mCalculando a taxa da Bandeira...\033[m')
 sleep(1.5)

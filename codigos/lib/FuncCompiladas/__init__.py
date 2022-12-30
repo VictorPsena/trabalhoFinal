@@ -36,16 +36,24 @@ def VerificaInt(num):
 
 ######################### Qual é a bandeira do cartão ########################################
 def VerficaBandeira(msg):
-    bandeiras = ['visa', 'mastercard', 'elo', 'hipercard']
-    n = str(input(msg)).lower()
-    for i in bandeiras:
-        if n == i:
-            sleep(1)
-            Linhas(f"A Bandeira Escolida é \033[3{len(i)}m{i.upper()}\033[m")
-            sleep(1)
+    while True:
+        n = str(input(msg)).lower().strip()
+        sleep(1)
+        if n == 'visa':
+            Linhas('A Bandeira escolida é \033[32mVISA\033[m!')
+            return n
+        elif n == 'mastercard':
+            Linhas('A Bandeira escolida é \033[33mMASTERCARD\033[m!')
+            return n
+        elif n == 'elo':
+            Linhas('A Bandeira escolida é \033[34mELO\033[m!')
+            return n
+        elif n == 'hipercard':
+            Linhas('A Bandeira escolida é \033[33mHIPERCARD\033[m!')
+            return n
         else:
+            print('Bandeira do cartão não cadastrada.')
             continue
-    return n
 ##############################################################################################
 
 
@@ -92,6 +100,7 @@ def QuantidadeParcelas(msg):
 def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
     # band = str(bandeira)
     # parc = int(parcelas)
+    # as taxas das bandeiras são baseadas na maquininha ton no plano GigaTon
     taxa = 0
     listaCreditoVM = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
     listaDebitoVM = 0.0179
@@ -171,7 +180,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, desconMax, ValorVenda ]
+                    return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
 
         
              elif  500 <= ValorCompra < 5000:
@@ -271,7 +280,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     media = soma/len(listaTaxas)
                     
                     
-                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                    ValorVenda = ValorCompra + 2*media + taxa*ValorCompra
                     Val_Comp = ValorCompra
                     Val_Vend = ValorVenda
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
