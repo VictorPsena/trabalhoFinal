@@ -149,7 +149,7 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 
 ############### Calcula o preço que o vendedor pode colocar no produto #######################
 
-# Para definirmos nosso valor ideal do preço do produto temos que saber como a nossa loja funciona e com qual frequência o produto está sendo vendido, se estiver sendo muito vendido, podemos aumenter a nossa margem de lucro, se não, diminuir, se for muito dificil de produzir, podemos aumenter, e assim por diante. Temos vários fatores que acarretam na variação do lucro, mas, digamos que podemos definir uma margem de lucro depedendo do preço do produto, por exemplo, se o produto custa entre 0 < custo < 500 a margem de lucro é de 10% em cima do valor do produto, caso o valor aumente, eu posso diminuir a porcentagem, entretanto o lucro será maior.
+# Para definirmos nosso valor ideal do preço do produto temos que saber como a nossa loja funciona e com qual frequência o produto está sendo vendido, se estiver sendo muito vendido, podemos aumenter a nossa margem de lucro, se não, diminuir, se for muito dificil de produzir, podemos aumentar, e assim por diante. Temos vários fatores que acarretam na variação do lucro, mas, digamos que podemos definir uma margem de lucro depedendo do preço do produto, por exemplo, se o produto custa entre 0 < custo < 500 a margem de lucro é de 10% em cima do valor do produto, caso o valor aumente, eu posso diminuir a porcentagem, entretanto o lucro será maior.
 
 # essa função calcula o lucro, desconto máximo e preço ideal para o produto ser vendido 
 
@@ -162,7 +162,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
     desconMax = 0
     while True:
         if bandeira == 'visa' or bandeira == 'mastercard':
-             if  0 < ValorCompra < 500:
+             if  0 < ValorCompra < 500: #grupo 1
                  listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
                  taxa = 0.12 # em cada if a única coisa que muda é a taxa 
                  soma = 0
@@ -183,7 +183,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
 
         
-             elif  500 <= ValorCompra < 5000:
+             elif  500 <= ValorCompra < 5000: #grupo 2 
                  listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
                  taxa = 0.11 # aqui muda
                  soma = 0
@@ -204,7 +204,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  else:
                     return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
         
-             elif  5000 <= ValorCompra <= 50000:
+             elif  5000 <= ValorCompra <= 50000: #grupo 3
                  listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
                  taxa = 0.07 # aqui muda
                  soma = 0
