@@ -223,6 +223,11 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     return 'Compra cancelado, tente renegociar.'
                  else:
                     return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                
+             else:
+                 print("O Valor do produto excede os valores cadastrados ")
+                 ValorCompra = int(input("Digite o valor da compra: "))
+                 continue
 
 
         # Agora vamos fazer para as bandeira 'elo' e 'hipercard'
@@ -280,7 +285,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     media = soma/len(listaTaxas)
                     
                     
-                    ValorVenda = ValorCompra + 2*media + taxa*ValorCompra
+                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
                     Val_Comp = ValorCompra
                     Val_Vend = ValorVenda
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
@@ -290,6 +295,10 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                         return 'Compra cancelado, tente renegociar.'
                     else:
                         return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+            else:
+                 print("O Valor do produto excede os valores cadastrados ")
+                 ValorCompra = int(input("Digite o valor da compra: "))
+                 continue
 
         else:
            print("\033[33mAlgum valor está errado\033[m")
@@ -299,8 +308,8 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
 
 # opcao = DebCred('Débito ou Crédito: ')
-# taxa = TaxaBandeira('visa', 6, opcao )
+# taxa = TaxaBandeira('elo', 12, opcao )
 # print(taxa)
-# lista =ldp(1000, 'visa', taxa )
+# lista =ldp(50000, 'elo', taxa )
 # print(lista)
 ###############################################################################################
