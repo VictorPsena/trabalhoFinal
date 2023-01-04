@@ -1,6 +1,6 @@
 #Aqui será escrito o código para o trabalho final de Modelagem Matemática.
 from lib.FuncCompiladas import *
-from lib.FuncTeste import PrecoIdeal
+#from lib.FuncTeste import PrecoIdeal
 from time import sleep
 
 Linhas("\033[33mLucro Ideal\033[m")
