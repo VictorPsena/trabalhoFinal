@@ -155,32 +155,31 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 
 
 def ldp(ValorCompra,  bandeira, TaxaCartao):
-    ValorVenda = 0
-    listaTaxas =[]
     Lucro_Liq = 0
     Lucro_marg = 0
     desconMax = 0
+    precos = 0
+
     while True:
         if bandeira == 'visa' or bandeira == 'mastercard':
              if  0 < ValorCompra < 500: #grupo 1
-                 listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
                  taxa = 0.12 # em cada if a única coisa que muda é a taxa 
-                 soma = 0
-                 for i in listaTaxas:
-                     soma += i*ValorCompra
+                 listapreco = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349, 0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488] # Tem as taxas de todos os cartões.
+                 for i in listapreco:
+                     precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra) # o 'ValorCompra*taxa + valorCompra' é o meu valor mínimo da venda, ou seja, não posso ter um preço menor que esse.
 
-                 media = soma/len(listaTaxas)
 
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra # O valor da compra tem que ser alterado, pois como quero lucro mínimo, tenho que ter os 10% dentro do valor antes de add o valor da venda.
+                 mediaprecos = precos/len(listapreco) # Como eu não sei em qual bandeira o meu cliente vai comprar antes de anunciar o produto, faço uma previsão, pego todas as taxa do cartão e divido pela quantidade de taxas, obtendo assim uma média de preços.
                  Val_Comp = ValorCompra 
-                 Val_Vend = ValorVenda
+                 Val_Vend = mediaprecos + listapreco[23]*ValorCompra # Como obti a média de preços, caso o meu cliente queira comprar com a maior parcela tenho que fazer essa previsão na hora de inserir o preço.
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                  Lucro_marg = Lucro_Liq/Val_Vend
-                 desconMax = Lucro_Liq - Val_Vend*taxa # onde muda
+                 desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) # onde muda
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax]
+
 
         
              elif  500 <= ValorCompra < 5000: #grupo 2 
