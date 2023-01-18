@@ -171,8 +171,8 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
                  media = soma/len(listaTaxas)
 
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
-                 Val_Comp = ValorCompra
+                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra # O valor da compra tem que ser alterado, pois como quero lucro mínimo, tenho que ter os 10% dentro do valor antes de add o valor da venda.
+                 Val_Comp = ValorCompra 
                  Val_Vend = ValorVenda
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                  Lucro_marg = Lucro_Liq/Val_Vend
