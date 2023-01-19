@@ -161,10 +161,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
     precos = 0
 
     while True:
+        listapreco = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349, 0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
         if bandeira == 'visa' or bandeira == 'mastercard':
-             if  0 < ValorCompra < 500: #grupo 1
+            
+            if  0 < ValorCompra < 500: #grupo 1
                  taxa = 0.12 # em cada if a única coisa que muda é a taxa 
-                 listapreco = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349, 0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488] # Tem as taxas de todos os cartões.
+                 # Tem as taxas de todos os cartões.
                  for i in listapreco:
                      precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra) # o 'ValorCompra*taxa + valorCompra' é o meu valor mínimo da venda, ou seja, não posso ter um preço menor que esse.
 
@@ -174,55 +176,48 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  Val_Vend = mediaprecos + listapreco[23]*ValorCompra # Como obti a média de preços, caso o meu cliente queira comprar com a maior parcela tenho que fazer essa previsão na hora de inserir o preço. Então no caso do nosso programa, estamos sempre prevendo a maior parcela do cartão, que no nosso caso é 0.1488
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp # onde muda
                  Lucro_marg = Lucro_Liq/Val_Vend
-                 desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) # o desconto máximo está deixando apenas os 12% de lucro mínimo para esse tipo de valor.
+                 desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend # o desconto máximo está deixando apenas os 12% de lucro mínimo para esse tipo de valor.
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
                     return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax]
 
         
-             elif  500 <= ValorCompra < 5000: #grupo 2 
-                 listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
-                 taxa = 0.11 # aqui muda
-                 soma = 0
-                 for i in listaTaxas:
-                     soma += i*ValorCompra
+            elif  500 <= ValorCompra < 5000: #grupo 2 
+                 taxa = 0.10 # aqui muda
+                 for i in listapreco:
+                     precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra)
 
-                 media = soma/len(listaTaxas)
-                
- 
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 
+                 mediaprecos = precos/len(listapreco)
                  Val_Comp = ValorCompra
-                 Val_Vend = ValorVenda
+                 Val_Vend = mediaprecos + listapreco[23]*ValorCompra
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                  Lucro_marg = Lucro_Liq/Val_Vend
-                 desconMax = Lucro_Liq - Val_Vend*taxa
+                 desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
         
-             elif  5000 <= ValorCompra <= 50000: #grupo 3
-                 listaTaxas = [0.0369, 0.0599, 0.0629, 0.0715, 0.0799, 0.0879, 0.0959, 0.1039,  0.1119, 0.1199, 0.1279, 0.1349]
+            elif  5000 <= ValorCompra <= 50000: #grupo 3
                  taxa = 0.07 # aqui muda
-                 soma = 0
-                 for i in listaTaxas:
-                     soma += i*ValorCompra
+                 for i in listapreco:
+                     precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra)
 
-                 media = soma/len(listaTaxas)
-
-                 ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 
+                 mediaprecos = precos/len(listapreco)
                  Val_Comp = ValorCompra
-                 Val_Vend = ValorVenda
+                 Val_Vend = mediaprecos + listapreco[23]*ValorCompra
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                  Lucro_marg = Lucro_Liq/Val_Vend
-                 desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                 desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
                 
-             else:
+            else:
                  print("O Valor do produto excede os valores cadastrados ")
                  ValorCompra = int(input("Digite o valor da compra: "))
                  continue
@@ -232,67 +227,56 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
         elif bandeira == 'elo' or bandeira == 'hipercard':
             if 0 < ValorCompra < 500:
-                    listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
-                    taxa = 0.1
-                    soma = 0
-                    for i in listaTaxas:
-                        soma += i*ValorCompra
+                    taxa = 0.12
+                    for i in listapreco:
+                     precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra)
 
-                    media = soma/len(listaTaxas)
-
-                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 
+                    mediaprecos = precos/len(listapreco)
                     Val_Comp = ValorCompra
-                    Val_Vend = ValorVenda
+                    Val_Vend = mediaprecos + listapreco[23]*ValorCompra
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
-                    desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                    desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     if Lucro_marg < 0.1:
                         return 'Compra cancelado, tente renegociar.'
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
 
 
             elif  500 <= ValorCompra < 5000:
-                    listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
-                    taxa = 0.08
-                    soma = 0
-                    for i in listaTaxas:
-                        soma += i*ValorCompra
+                    taxa = 0.10
+                    for i in listapreco:
+                     precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra)
 
-                    media = soma/len(listaTaxas)
-                    
-                    
-                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 
+                    mediaprecos = precos/len(listapreco)
                     Val_Comp = ValorCompra
-                    Val_Vend = ValorVenda
+                    Val_Vend = mediaprecos + listapreco[23]*ValorCompra
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
-                    desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                    desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     if Lucro_marg < 0.1:
                         return 'Compra cancelado, tente renegociar.'
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
 
             elif 5000 <= ValorCompra <= 50000:
-                    listaTaxas = [0.0488, 0.0738, 0.0768, 0.0854, 0.0938, 0.1018, 0.1098, 0.1178, 0.1258,  0.1338, 0.1418, 0.1488]
-                    taxa = 0.05
-                    soma = 0
-                    for i in listaTaxas:
-                        soma += i*ValorCompra
+                    taxa = 0.07
+                    for i in listapreco:
+                     precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra)
 
-                    media = soma/len(listaTaxas)
-                    
-                    
-                    ValorVenda = ValorCompra + 3*media + taxa*ValorCompra
+                 
+                    mediaprecos = precos/len(listapreco)
                     Val_Comp = ValorCompra
-                    Val_Vend = ValorVenda
+                    Val_Vend = mediaprecos + listapreco[23]*ValorCompra
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
-                    desconMax = Lucro_Liq - Val_Vend*taxa # onde altera
+                    desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     if Lucro_marg < 0.1:
                         return 'Compra cancelado, tente renegociar.'
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, ValorVenda, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
             else:
                  print("O Valor do produto excede os valores cadastrados ")
                  ValorCompra = int(input("Digite o valor da compra: "))
