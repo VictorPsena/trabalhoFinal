@@ -17,9 +17,9 @@ lista = ldp(valComp, bandeira, taxa)
 Linhas("\033[33mCalculando o desconto...\033[m")
 sleep(1.5)
 #print(f'\n O Lucro da venda sem desconto é de R${lista[0]:.2f} \n Sendo a magem de lucro igual a {lista[1]:.2f}% \n Com isso o desconto Máximo que podemos dar é igual a R${lista[3]:.2f}')
-tabela = ['Lucro', 'Margem de Lucro', 'Preço Ideal', 'Desconto Máximo']
+tabela = ['Lucro', 'Margem de Lucro', 'Preço Ideal', 'Desconto Máximo', 'Lucro mínimo', 'Taxa da maquininha']
 
-for i in range(4):
+for i in range(6):
     if i == 1:
         print(f"\033[3{i}m {tabela[i]} : {lista[i]:.2f}%\033[m")
         Linhas2(tam=29)
@@ -27,4 +27,4 @@ for i in range(4):
     else:
         print(f"\033[3{i}m {tabela[i]} : R${lista[i]:.2f}\033[m")
         Linhas2(tam=29)
-        sleep(1)
+  

@@ -177,10 +177,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp # onde muda
                  Lucro_marg = Lucro_Liq/Val_Vend
                  desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend # o desconto máximo está deixando apenas os 12% de lucro mínimo para esse tipo de valor.
+                 lucromin = ValorCompra*taxa
+                 taxamaquina = Val_Vend*TaxaCartao
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax]
+                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
         
             elif  500 <= ValorCompra < 5000: #grupo 2 
