@@ -141,8 +141,9 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 
 
 
-# x = TaxaBandeira('elo', 12, 6)
-# print(x)
+#x = TaxaBandeira('elo', 2, 7)
+
+#print(x)
 
 ##############################################################################################
 
@@ -197,10 +198,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                  Lucro_marg = Lucro_Liq/Val_Vend
                  desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
+                 lucromin = ValorCompra*taxa
+                 taxamaquina = Val_Vend*TaxaCartao
                  if Lucro_marg < 0.1:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
+                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
         
             elif  5000 <= ValorCompra <= 50000: #grupo 3
                  taxa = 0.07 # aqui muda
@@ -214,10 +217,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                  Lucro_marg = Lucro_Liq/Val_Vend
                  desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
-                 if Lucro_marg < 0.1:
+                 lucromin = ValorCompra*taxa
+                 taxamaquina = Val_Vend*TaxaCartao
+                 if Lucro_marg < 0.8:
                     return 'Compra cancelado, tente renegociar.'
                  else:
-                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
+                    return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
                 
             else:
                  print("O Valor do produto excede os valores cadastrados ")
@@ -240,10 +245,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
+                    lucromin = ValorCompra*taxa
+                    taxamaquina = Val_Vend*TaxaCartao
                     if Lucro_marg < 0.1:
                         return 'Compra cancelado, tente renegociar.'
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
 
             elif  500 <= ValorCompra < 5000:
@@ -258,10 +265,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
-                    if Lucro_marg < 0.1:
+                    lucromin = ValorCompra*taxa
+                    taxamaquina = Val_Vend*TaxaCartao
+                    if Lucro_marg < 0.8:
                         return 'Compra cancelado, tente renegociar.'
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
             elif 5000 <= ValorCompra <= 50000:
                     taxa = 0.07
@@ -275,10 +284,12 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
-                    if Lucro_marg < 0.1:
-                        return 'Compra cancelado, tente renegociar.'
+                    lucromin = ValorCompra*taxa
+                    taxamaquina = Val_Vend*TaxaCartao
+                    if Lucro_marg < 0.5:
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
             else:
                  print("O Valor do produto excede os valores cadastrados ")
                  ValorCompra = int(input("Digite o valor da compra: "))
@@ -291,7 +302,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
            continue
 
 
-# opcao = DebCred('Débito ou Crédito: ')
+# opcao = 7
 # taxa = TaxaBandeira('elo', 12, opcao )
 # print(taxa)
 # lista =ldp(50000, 'elo', taxa )
