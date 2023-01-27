@@ -141,8 +141,9 @@ def TaxaBandeira(bandeira, parcelas, DebitoOuCredito):
 
 
 
-# x = TaxaBandeira('elo', 12, 6)
-# print(x)
+#x = TaxaBandeira('elo', 2, 7)
+
+#print(x)
 
 ##############################################################################################
 
@@ -218,6 +219,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                  lucromin = ValorCompra*taxa
                  taxamaquina = Val_Vend*TaxaCartao
+
                  if Lucro_marg < 0.08:
                     return 1
                  else:
@@ -266,8 +268,10 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     lucromin = ValorCompra*taxa
                     taxamaquina = Val_Vend*TaxaCartao
+
                     if Lucro_marg < 0.08:
                         return 1
+                    
                     else:
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
@@ -285,8 +289,10 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     lucromin = ValorCompra*taxa
                     taxamaquina = Val_Vend*TaxaCartao
+
                     if Lucro_marg < 0.05:
                         return 1
+
                     else:
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
             else:
@@ -301,7 +307,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
            continue
 
 
-# opcao = DebCred('Débito ou Crédito: ')
+# opcao = 7
 # taxa = TaxaBandeira('elo', 12, opcao )
 # print(taxa)
 # lista =ldp(50000, 'elo', taxa )
