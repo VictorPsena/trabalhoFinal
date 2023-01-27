@@ -180,7 +180,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  lucromin = ValorCompra*taxa
                  taxamaquina = Val_Vend*TaxaCartao
                  if Lucro_marg < 0.1:
-                    return 'Compra cancelado, tente renegociar.'
+                    return 1
                  else:
                     return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
@@ -200,7 +200,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  lucromin = ValorCompra*taxa
                  taxamaquina = Val_Vend*TaxaCartao
                  if Lucro_marg < 0.1:
-                    return 'Compra cancelado, tente renegociar.'
+                    return 1
                  else:
                     return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
         
@@ -218,8 +218,8 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                  lucromin = ValorCompra*taxa
                  taxamaquina = Val_Vend*TaxaCartao
-                 if Lucro_marg < 0.1:
-                    return 'Compra cancelado, tente renegociar.'
+                 if Lucro_marg < 0.08:
+                    return 1
                  else:
                     return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
                 
@@ -247,7 +247,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     lucromin = ValorCompra*taxa
                     taxamaquina = Val_Vend*TaxaCartao
                     if Lucro_marg < 0.1:
-                        return 'Compra cancelado, tente renegociar.'
+                        return 1
                     else:
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
@@ -266,27 +266,27 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     lucromin = ValorCompra*taxa
                     taxamaquina = Val_Vend*TaxaCartao
-                    if Lucro_marg < 0.1:
-                        return 'Compra cancelado, tente renegociar.'
+                    if Lucro_marg < 0.08:
+                        return 1
                     else:
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
 
             elif 5000 <= ValorCompra <= 50000:
-                    taxa = 0.07
+                    taxa = 0.08
                     for i in listapreco:
                      precos += i*(ValorCompra*taxa + ValorCompra) + (ValorCompra*taxa + ValorCompra)
 
                  
                     mediaprecos = precos/len(listapreco)
                     Val_Comp = ValorCompra
-                    Val_Vend = mediaprecos + listapreco[23]*ValorCompra
+                    Val_Vend = mediaprecos + listapreco[22]*ValorCompra
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     Lucro_marg = Lucro_Liq/Val_Vend
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     lucromin = ValorCompra*taxa
                     taxamaquina = Val_Vend*TaxaCartao
-                    if Lucro_marg < 0.1:
-                        return 'Compra cancelado, tente renegociar.'
+                    if Lucro_marg < 0.05:
+                        return 1
                     else:
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
             else:
