@@ -27,4 +27,5 @@ for i in range(6):
     else:
         print(f"\033[3{i}m {tabela[i]} : R${lista[i]:.2f}\033[m")
         Linhas2(tam=29)
+        sleep(1)
   
