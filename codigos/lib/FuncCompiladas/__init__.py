@@ -62,8 +62,9 @@ def VerficaBandeira(msg):
 # 6 siginifica que a compra será efetuada no débito
 def DebCred(msg):
     while True:
-        n = str(input(msg)).upper().strip()[0]
-        
+        #n = str(input(msg)).upper().strip()[0] #Para usar o app comenta essa linha e descomenta a de baixo
+        n = msg.upper().strip()[0]
+      
         if n =='C':
             x = 7
             return x

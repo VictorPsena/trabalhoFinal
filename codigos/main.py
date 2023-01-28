@@ -15,31 +15,55 @@ vband.place(x=10, y=30, width=200, height=20)
 
 
 
+
 ########################################################################################
 
-texto = tk.Label(app, text=" Qual o seu número?",background= '#dde', foreground='#009', anchor= tk.W)
+texto = tk.Label(app, text=" Vai ser no crédito ou no débito?",background= '#dde', foreground='#009', anchor= tk.W)
 texto.place(x = 10, y = 50, width=200, height=20)
 
-vnumero = tk.Entry(app)
-vnumero.place(x=10, y=80, width=200, height=20)
+vcreddeb = tk.Entry(app)
+vcreddeb.place(x=10, y=80, width=200, height=20)
 ########################################################################################
+
+texto = tk.Label(app, text=" Quantas parcelas?",background= '#dde', foreground='#009', anchor= tk.W)
+texto.place(x = 10, y = 110, width=200, height=20)
+
+vparce = tk.Entry(app)
+vparce.place(x=10, y=140, width=200, height=20)
+
+########################################################################################
+
+
+texto = tk.Label(app, text="Qual o valor do produto comprado pelo vendedor?",background= '#dde', foreground='#009', anchor= tk.W)
+texto.place(x = 10, y = 170, width=400, height=20)
+
+vval = tk.Entry(app)
+vval.place(x=10, y=200, width=200, height=20)
+
+
+
 def v1():
     i = vband.get()
-    n = vnumero.get()
-    print(n, i)
-    label = tk.Label(app, text= f'{i} e {n}', background="#ffe")
-    label.place(x=10, y=140)
+    c = vcreddeb.get()
+    p = vparce.get()
+    v = vval.get()
 
-    return [i, n]
+   
+
+    db = DebCred(c)
+    taxa = TaxaBandeira(i, int(p), db)
+    lista = ldp(float(v), i, taxa)
+
+
+    label = tk.Label(app, text= f' Lucro: {lista[0]:.2f} \n Margem de lucro: {lista[1]:.2f} \n Preço Ideal: {lista[2]:.2f} \n Desconto Máximo: {lista[3]:.2f} \n Lucro mínimo: {lista[4]:.2f} \n Tarifa da maquininha: {lista[5]:.2f}', bg ="#ffe")
+    label.place(x=40, y=260, width=400, height=200)
+
+    return [i, c, p, v]
 
 
 
 
-
-tk.Button(app, text='Enviar', command= v1, bg="#fff").place(x=10, y=110, width=90, height=20)
-
-lista = v1()
-
+tk.Button(app, text='Enviar', command= v1, bg="#fff").place(x=10, y=230, width=90, height=20)
 
 
 app.mainloop()
