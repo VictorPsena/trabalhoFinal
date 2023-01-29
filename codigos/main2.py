@@ -4,7 +4,8 @@ app = Tk()
 
 app.title("LDP")
 app.geometry("500x750+610+153")
-app.resizable(width=1, height=1)
+app.resizable(False, False)
+
 
 #importando as imgs
 
@@ -16,20 +17,20 @@ label_fundo = Label(app, image= img_fundo)
 label_fundo.pack()
 
 
-vband = Entry(app)
+vband = Entry(app, justify=CENTER, font="Impact")
 vband.place(x=110, y=177, width=270, height=40)
 
 
-vcreddeb = Entry(app)
+vcreddeb = Entry(app, justify=CENTER, font="Impact")
 vcreddeb.place(x=110, y=265.80, width=270, height=40)
 
 
-vparce = Entry(app)
+vparce = Entry(app, justify=CENTER, font="Impact")
 vparce.place(x=110, y=357, width=270, height=40)
 
 
 
-vval = Entry(app)
+vval = Entry(app, justify=CENTER, font="Impact")
 vval.place(x=110, y=453, width=270, height=40)
 
 
@@ -51,15 +52,15 @@ def v1():
     lista = ldp(float(v), i, taxa)
 
 
-    label = Label(app, text= f' Lucro: {lista[0]:.2f} \n Margem de lucro: {lista[1]:.2f} \n Preço Ideal: {lista[2]:.2f} \n Desconto Máximo: {lista[3]:.2f} \n Lucro mínimo: {lista[4]:.2f} \n Tarifa da maquininha: {lista[5]:.2f}', bg ="#ffe")
-    label.place(x=150, y=580, width=270, height=100)
+    label = Label(app, text= f' Lucro: R${lista[0]:.2f} \n Margem de lucro: {lista[1]:.2f}% \n Preço Ideal: R${lista[2]:.2f} \n Desconto Máximo: R${lista[3]:.2f} \n Lucro mínimo: R${lista[4]:.2f} \n Tarifa da maquininha: R${lista[5]:.2f}', bg ="#ffe")
+    label.place(x=120, y=580, width=270, height=100)
 
     return [i, c, p, v]
 
 
 
 
-Button(app, text='Enviar', command= v1, bg="#fff").place(x=210, y=514, width=80, height=40)
+Button(app, text='Enviar', command= v1, bg="#fff",  font="Impact", justify=CENTER).place(x=210, y=514, width=80, height=40)
 
 
 
