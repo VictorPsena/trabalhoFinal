@@ -1,6 +1,4 @@
 # Aqui, vou colocar todas as funções que utilizarei no para gerar o aplicativo
-from time import sleep
-
 def DebCred(msg):
     while True:
         n = msg.upper().strip()[0]
@@ -79,6 +77,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  Lucro_marg = Lucro_Liq/Val_Vend
                  desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend 
                  taxamaquina = Val_Vend*TaxaCartao
+                 lucromin = ValorCompra*taxa
                  if Lucro_marg < 0.1:
                     return 1
                  else:
