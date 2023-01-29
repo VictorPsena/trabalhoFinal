@@ -1,5 +1,5 @@
 import tkinter as tk
-from lib.FuncCompiladas import *
+from lib.FuncCompiladasApp import *
 
 
 
