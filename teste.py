@@ -297,4 +297,22 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
 
 
-print(ldp(200, 'elo',  0.1488))   
+#print(ldp(200, 'elo',  0.1488))  
+
+
+
+
+lista = ["oi", "como"]
+
+
+val = str(input(": "))
+while True:
+   
+    try:    
+        i = lista.index(val)
+    except (ValueError, TypeError):
+        print("erro")
+        val = str(input("digite : "))
+        continue
+    else:
+        break

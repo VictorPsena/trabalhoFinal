@@ -41,11 +41,42 @@ vval.place(x=110, y=453, width=270, height=40)
 
 def v1():
     i = vband.get()
+    # if i != "visa" or i != "elo" or i!= "mastercard":
+    #     erro = Tk()
+    #     erro.geometry("270x100+710+253")
+    #     erro.title("ERRO")
+    #     erro.resizable(False, False)
+    #     texto = Label(erro, text="Digite uma bandeira válida.",background= '#dde', foreground='red', anchor= N, font="Impact")
+    #     texto.place(x = 10, y =10, width= 250, height= 30)
+    #     Button(erro, text="Enviar", command= erro.destroy,font="Impact", justify=CENTER, foreground="green" ).place(x = 105, y=50, width=50, height= 30)
+    #     erro.mainloop()
+
+    lista = ['elo', 'visa', 'mastercard', 'hipercard']
+    try:
+       lista.index(i)
+    except (ValueError, TypeError):
+        erro = Tk()
+        erro.geometry("270x100+710+253")
+        erro.title("ERRO")
+        erro.resizable(False, False)
+        texto = Label(erro, text="Digite uma bandeira válida.",background= '#dde', foreground='red', anchor= N, font="Impact")
+        texto.place(x = 10, y =10, width= 250, height= 30)
+        Button(erro, text="OK", command= erro.destroy,font="Impact", justify=CENTER, foreground="green" ).place(x = 105, y=50, width=50, height= 30)
+    
+
+        erro.mainloop()
+       
+   
+    
+    
+
+
     c = vcreddeb.get()
     p = vparce.get()
     v = vval.get()
 
-   
+    
+
 
     db = DebCred(c)
     taxa = TaxaBandeira(i, int(p), db)
