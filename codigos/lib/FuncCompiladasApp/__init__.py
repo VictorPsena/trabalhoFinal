@@ -123,10 +123,6 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
                  else:
                     return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
                 
-            else:
-                 print("O Valor do produto excede os valores cadastrados ")
-                 ValorCompra = int(input("Digite o valor da compra: "))
-                 continue
 
 
         # Agora vamos fazer para as bandeira 'elo' e 'hipercard'
@@ -193,10 +189,6 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
                     else:
                         return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax, lucromin, taxamaquina ]
-            else:
-                 print("O Valor do produto excede os valores cadastrados ")
-                 ValorCompra = int(input("Digite o valor da compra: "))
-                 continue
 
         else:
            print("\033[33mAlgum valor está errado\033[m")
