@@ -173,6 +173,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
 
                  mediaprecos = precos/len(listapreco) # Como eu não sei em qual bandeira o meu cliente vai comprar antes de anunciar o produto, faço uma previsão, pego todas as taxa do cartão e divido pela quantidade de taxas, obtendo assim uma média de preços.
+                #  print(mediaprecos)
                  Val_Comp = ValorCompra 
                  Val_Vend = mediaprecos + listapreco[23]*ValorCompra # Como obti a média de preços, caso o meu cliente queira comprar com a maior parcela tenho que fazer essa previsão na hora de inserir o preço. Então no caso do nosso programa, estamos sempre prevendo a maior parcela do cartão, que no nosso caso é 0.1488
                  Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp # onde muda
@@ -308,8 +309,8 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
 
 # opcao = 7
-# taxa = TaxaBandeira('elo', 12, opcao )
+# taxa = TaxaBandeira('visa', 12, opcao )
 # print(taxa)
-# lista =ldp(50000, 'elo', taxa )
+# lista =ldp(200, 'visa', taxa )
 # print(lista)
 ###############################################################################################

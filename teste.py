@@ -245,7 +245,7 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 #########################################################################################################################################
 
 
-def ldp(ValorCompra,  bandeira, TaxaCartao):
+def ldp1(ValorCompra,  bandeira, TaxaCartao):
     Lucro_Liq = 0
     Lucro_marg = 0
     desconMax = 0
@@ -284,35 +284,37 @@ def ldp(ValorCompra,  bandeira, TaxaCartao):
 
                  
                     mediaprecos = precos/len(listapreco)
+                    
                     Val_Comp = ValorCompra
                     Val_Vend = mediaprecos + listapreco[23]*ValorCompra
                     Lucro_Liq = Val_Vend - TaxaCartao*Val_Vend - Val_Comp
                     print(TaxaCartao*Val_Vend)
                     print(TaxaCartao)
+                    print('oi')
                     Lucro_marg = Lucro_Liq/Val_Vend
                     desconMax = Val_Vend - (ValorCompra*taxa + ValorCompra) - TaxaCartao*Val_Vend
                     if Lucro_marg < 0.1:
                         return 'Compra cancelado, tente renegociar.'
                     else:
-                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax ]
+                        return [Lucro_Liq, Lucro_marg*100, Val_Vend, desconMax]
 
 
-#print(ldp(200, 'elo',  0.1488))  
+print(ldp1(200, 'visa',  0.1488))  
 
 
 
 
-lista = ["oi", "como"]
+# lista = ["oi", "como"]
 
 
-val = str(input(": "))
-while True:
+# val = str(input(": "))
+# while True:
    
-    try:    
-        i = lista.index(val)
-    except (ValueError, TypeError):
-        print("erro")
-        val = str(input("digite : "))
-        continue
-    else:
-        break
+#     try:    
+#         i = lista.index(val)
+#     except (ValueError, TypeError):
+#         print("erro")
+#         val = str(input("digite : "))
+#         continue
+#     else:
+#         break
