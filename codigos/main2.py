@@ -168,7 +168,7 @@ def v1():
     lista = ldp(float(v), i, taxa)
 
 
-    label = Label(app, text= f'Lucro: R${lista[0]:.2f} \n Margem de lucro: {lista[1]:.2f}% \n Preço Ideal: R${lista[2]:.2f} \n Desconto Máximo: R${lista[3]:.2f} \n Lucro mínimo: R${lista[4]:.2f} \n Tarifa da maquininha: R${lista[5]:.2f}', bg ="#48D1CC", border= 5, foreground="#fff", font="ArialBlack")
+    label = Label(app, text= f'Lucro: R${lista[0]:.2f} \n Margem de lucro: {lista[1]:.2f}% \n Preço Ideal: R${lista[2]:.2f} \n Desconto Máximo: R${lista[3]:.2f} \n Lucro mínimo: R${lista[4]:.2f} \n Tarifa da maquininha: R${lista[5]:.2f} \n Parcelas: R${lista[2]/int(vparce.get()):.2f}', bg ="#48D1CC", border= 5, foreground="#fff", font="ArialBlack")
     label.place(x=120, y=580, width=270, height=130)
 
 
